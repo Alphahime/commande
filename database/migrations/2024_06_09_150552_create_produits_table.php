@@ -14,7 +14,7 @@ class CreateProduitsTable extends Migration
             $table->float('prix');
             $table->unsignedBigInteger('categorieId');
             $table->enum('etat', ['disponible', 'enStock', 'ruptureStock'])->default('disponible');
-            $table->string('image')->nullable();
+            $table->string('image');
             $table->timestamps();
 
             $table->foreign('categorieId')->references('id')->on('categories');

@@ -10,7 +10,7 @@
 <body>
     <div class="container mt-5">
         <h1>Modifier un produit</h1>
-        <form action="{{ route('produits.mettreAJour', $produit->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('produits.mettreAJour', $produit->id) }}" method="POST">
             @csrf
             @method('PUT')
             <div class="form-group">
@@ -38,8 +38,8 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="image">Image:</label>
-                <input type="file" id="image" name="image" class="form-control-file">
+                <label for="image">URL de l'image:</label>
+                <input type="url" id="image" name="image" class="form-control" value="{{ $produit->image }}">
             </div>
             <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
             <a href="{{ route('produits.index') }}" class="btn btn-secondary">Annuler</a>

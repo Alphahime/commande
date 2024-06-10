@@ -46,7 +46,6 @@ class ProduitController extends Controller
     
         return view('produits.index', compact('produits'));
     }
-    
     public function store(Request $request)
     {
         $data = $request->validate([
@@ -54,20 +53,13 @@ class ProduitController extends Controller
             'prix' => 'required|numeric',
             'categorieId' => 'required|exists:categories,id',
             'etat' => 'required|in:disponible,ruptureStock,enStock',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validation de l'image
+            'image' => 'required|url', // Validation de l'URL de l'image
         ]);
     
-        // Upload de l'image
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('public/images');
-            $data['image'] = str_replace('public/', 'images', $imagePath); 
-        }
-     
         Produit::create($data);
     
         return redirect()->route('produits.index');
     }
-    
     
     public function afficher(Produit $produit)
     {
@@ -100,4 +92,16 @@ class ProduitController extends Controller
 
         return redirect()->route('produits.index');
     }
+
+    public function details($id)
+{
+    $produit = Produit::findOrFail($id);
+    return view('commande.details', compact('produit'));
+}
+
+public function show($id)
+{
+    $produit = Produit::with('categorie')->findOrFail($id);
+    return view('commande.details', compact('produit'));
+}
 }

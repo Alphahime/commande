@@ -37,9 +37,11 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="image">Image:</label>
-                <input type="file" class="form-control-file" id="image" name="image">
+                <label for="image">URL de l'image:</label>
+                <input type="url" class="form-control" id="image" name="image" required>
+                <small id="imageHelp" class="form-text text-muted">Veuillez saisir l'URL de l'image du produit.</small>
             </div>
+            
             <button type="submit" class="btn btn-primary">Enregistrer</button>
         </form>
     </div>

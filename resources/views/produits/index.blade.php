@@ -29,17 +29,15 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 @foreach ($produits as $produit)
                 <div class="bg-white rounded-lg shadow-lg">
-                    @if($produit->image)
-                    <img src="{{ asset('storage/images/' . $produit->image) }}" alt="Image du produit" class="h-64 w-full object-cover rounded-t-lg">
-                @else
-                    <img src="{{ asset('storage/default-image.jpg') }}" alt="Image par défaut" class="h-64 w-full object-cover rounded-t-lg">
-                @endif
+                    <!-- Affichage de l'image directement via son URL -->
+                    <img src="{{ $produit->image }}" alt="Image du produit" class="h-64 w-full object-cover rounded-t-lg">
                 
                     <div class="p-6">
                         <h2 class="text-xl font-semibold">{{ $produit->nom }}</h2>
                         <p class="text-gray-600">{{ $produit->prix }}</p>
                         <p class="text-gray-600">{{ optional($produit->categorie)->nom }}</p>
                         <p class="text-gray-600">{{ $produit->etat }}</p>
+                        <!-- Liens de modification et suppression -->
                         <a href="{{ route('produits.afficher', $produit->id) }}" class="text-blue-500 hover:text-blue-700 mr-2"><i class="fas fa-eye mr-1"></i>Voir</a>
                         <a href="{{ route('produits.modifier', $produit->id) }}" class="text-yellow-500 hover:text-yellow-700 mr-2"><i class="fas fa-edit mr-1"></i>Modifier</a>
                         <form action="{{ route('produits.supprimer', $produit->id) }}" method="POST" class="inline-block">
@@ -49,8 +47,7 @@
                         </form>
                     </div>
                 </div>
-            @endforeach
-            
+                @endforeach
             </div>
         </div>
     </div>
